@@ -1,8 +1,8 @@
-import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import axios from "axios";
 
 function LoginForm() {
   const {
@@ -11,20 +11,20 @@ function LoginForm() {
     formState: { errors, isValid },
   } = useForm({
     defaultState: {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     },
-    mode: 'onChange',
+    mode: "onChange",
   });
   const { login } = useContext(AuthContext);
   const { push } = useHistory();
 
   const submitFn = (data) => {
     axios
-      .post('https://nextgen-project.onrender.com/api/s11d2/login', data)
+      .post("https://nextgen-project.onrender.com/api/s11d2/login", data)
       .then((response) => {
         login(response.data);
-        push('/friends');
+        push("/friends");
       })
       .catch((error) => {
         console.log(error.message);
@@ -34,13 +34,13 @@ function LoginForm() {
   return (
     <div>
       <div className="loginFormMainDiv">
-        <h1>LOGIN</h1>
+        <h1>LOGIN by WiT</h1>
         <form onSubmit={handleSubmit(submitFn)}>
           <div>
             <input
               type="text"
               placeholder="Username"
-              {...register('username', { required: 'Ama adın ne?' })}
+              {...register("username", { required: "Ama adın ne?" })}
             />
             {errors?.name && <p>{errors.name.message}</p>}
           </div>
@@ -48,8 +48,8 @@ function LoginForm() {
             <input
               type="password"
               placeholder="Password"
-              {...register('password', {
-                required: 'Şifre girmeyi unutmayın!',
+              {...register("password", {
+                required: "Şifre girmeyi unutmayın!",
               })}
             />
             {errors?.email && <p>{errors.email.message}</p>}
